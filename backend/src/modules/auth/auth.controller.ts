@@ -14,6 +14,12 @@ export async function loginHandler(req: Request, res: Response) {
 
     try {
         const user = await prisma.user.findFirst({
+            select: {
+                name: true,
+                email: true,
+                password: true,
+                isAdmin: true
+            },
             where: {
                 email: email
             }

@@ -35,12 +35,13 @@ model product {
     name         String
     slug         String      @unique
     image        String
-    price        Decimal
+    price        Decimal     @default(0)
     brand        String
     rating       Float       @default(0)
     numReviews   Int         @default(0)
     countInStock Int         @default(0)
     description  String
+    isPublished  Boolean     @default(false)
     category     category    @relation(fields: [categoryId], references: [id])
     categoryId   Int
     createdAt    DateTime    @default(now())
@@ -54,14 +55,14 @@ model orderItem {
     userId            Int
     product           product         @relation(fields: [productId], references: [id])
     productId         Int
-    quantity          Int
+    quantity          Int             @default(0)
     paymentMethod     String
     paymentResult     String
-    itemsPrice        Decimal
-    taxPrice          Decimal
-    totalPrice        Decimal
-    isPaid            Boolean
-    isDelivered       Boolean
+    itemsPrice        Decimal         @default(0)
+    taxPrice          Decimal         @default(0)
+    totalPrice        Decimal         @default(0)
+    isPaid            Boolean         @default(false)
+    isDelivered       Boolean         @default(false)
     paidAt            DateTime
     deliverAt         DateTime
     shippingAddress   shippingAddress @relation(fields: [shippingAddressId], references: [id])

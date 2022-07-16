@@ -2,11 +2,11 @@ import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import { prisma, comparePassword } from '../../utils';
 import { signJwt } from './auth.utils';
-import { UserInput } from '../../types';
+import { UserTypes } from '../../types';
 import { CORS_ORIGIN } from '../../constants';
 
 export async function loginHandler(req: Request, res: Response) {
-    const { email, password }: UserInput = req.body;
+    const { email, password }: UserTypes = req.body;
 
     if (!email || !password || email === '' || password === '') {
         res.status(StatusCodes.UNAUTHORIZED).send('All fields required');

@@ -1,10 +1,10 @@
 import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import { prisma, hashPassword } from '../../utils';
-import { UserInput } from '../../types';
+import { UserTypes } from '../../types';
 
 export async function registerUserHandler(req: Request, res: Response) {
-    const { name, email, password }: UserInput = req.body;
+    const { name, email, password }: UserTypes = req.body;
 
     if (!name || !email || !password || name === '' || email === '' || password === '') {
         res.status(StatusCodes.UNAUTHORIZED).send('All fields required');

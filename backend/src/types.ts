@@ -1,4 +1,4 @@
-export interface UserInput {
+export interface UserTypes {
     name: string,
     email: string,
     password: string,

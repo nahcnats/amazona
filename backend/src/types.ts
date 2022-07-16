@@ -1,6 +1,9 @@
 export interface UserTypes {
+    id: number,
     name: string,
     email: string,
     password: string,
-    isAdmin: boolean
+    isAdmin: boolean,
+    createdAt: string,
+    updatedAt: string,
 }

@@ -4,6 +4,8 @@ import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import { logger } from './utils';
 import { CORS_ORIGIN } from './constants';
+import userRoute from './modules/user/user.route';
+import authRoute from './modules/auth/auth.route';
 
 const PORT = process.env.PORT || 4000;
 
@@ -18,6 +20,8 @@ app.use(cors({
 }));
 
 // Routes
+app.use('api/users', userRoute);
+app.use('api/auth', authRoute);
 
 // Listener
 const server = app.listen(PORT, async () => {

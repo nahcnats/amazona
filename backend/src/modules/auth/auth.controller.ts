@@ -13,7 +13,7 @@ export async function loginHandler(req: Request, res: Response) {
     }
 
     try {
-        const user = await prisma.user.findFirst({
+        const validUser = await prisma.user.findUnique({
             select: {
                 name: true,
                 email: true,
@@ -25,14 +25,14 @@ export async function loginHandler(req: Request, res: Response) {
             }
         });
         
-        if (!user || !comparePassword(user.password, password)) {
+        if (!validUser || !comparePassword(validUser.password, password)) {
             return res.status(StatusCodes.UNAUTHORIZED).send('Invalid email or password');
         }
 
         const jwt = signJwt({
-            name: user.name,
-            email: user.email,
-            isAdmin: user.isAdmin
+            name: validUser.name,
+            email: validUser.email,
+            isAdmin: validUser.isAdmin
         });
 
         res.cookie("accessToken", jwt, {

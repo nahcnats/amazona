@@ -76,7 +76,8 @@ export async function getUserHandler(req: Request, res: Response) {
 }
 
 export async function editUserHandler(req: Request, res: Response) {
-    const { id, name, isAdmin, isActive } = req.body;
+    const { id } = req.params;
+    const { name, isAdmin, isActive } = req.body;
 
     try {
         await prisma.user.update({

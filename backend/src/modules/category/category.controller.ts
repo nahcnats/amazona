@@ -61,7 +61,7 @@ export async function getCategoryHandler(req: Request, res: Response) {
 }
 
 export async function editCategoryHandler(req: Request, res: Response) {
-    const { id } = req.body;
+    const { id } = req.params;
 
     try {
         await prisma.category.update({
@@ -77,7 +77,7 @@ export async function editCategoryHandler(req: Request, res: Response) {
     }
 }
 
-export async function name(req: Request, res: Response) {
+export async function deleteCategoryHandler(req: Request, res: Response) {
     const { id } = req.params;
 
     try {

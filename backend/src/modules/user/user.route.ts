@@ -5,8 +5,8 @@ import { registerUserHandler, getUsersHandler, getUserHandler, editUserHandler }
 const router = express.Router();
 
 router.post('/register', registerUserHandler);
-router.get('/users', requireUser, getUsersHandler);
-router.get('/users/:id', requireUser, getUserHandler);
-router.post('/users', requireUser, editUserHandler);
+router.get('/', requireUser, getUsersHandler);
+router.get('/:id', requireUser, getUserHandler);
+router.patch('/:id', requireUser, editUserHandler);
 
 export default router;

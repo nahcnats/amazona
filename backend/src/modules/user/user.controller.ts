@@ -39,3 +39,57 @@ export async function registerUserHandler(req: Request, res: Response) {
         return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(e.message);
     }
 }
+
+export async function getUsersHandler(req: Request, res: Response) {
+    try {
+        const users = await prisma.user.findMany();
+
+        res.status(StatusCodes.OK).send(users);
+    } catch (e: any) {
+        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(e.message);
+    }
+}
+
+export async function getUserHandler(req: Request, res: Response) {
+    const { id } = req.params;
+
+    try {
+        const user = await prisma.user.findUnique({
+            select: {
+                id: true,
+                name: true,
+                email: true,
+                isAdmin: true,
+                isActive: true,
+                createdAt: true,
+                updatedAt: true
+            },
+            where: {
+                id: Number(id)
+            }
+        });
+
+        res.status(StatusCodes.OK).send(user);
+    } catch (e: any) {
+        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(e.message);
+    }
+}
+
+export async function editUserHandler(req: Request, res: Response) {
+    const { id, name, isAdmin, isActive } = req.body;
+
+    try {
+        await prisma.user.update({
+            data: {
+                name: name,
+                isAdmin: isAdmin,
+                isActive: isActive
+            },
+            where: {
+                id: Number(id)
+            }
+        });
+    } catch (e: any) {
+        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(e.message);
+    }
+}

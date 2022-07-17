@@ -89,6 +89,8 @@ export async function editUserHandler(req: Request, res: Response) {
                 id: Number(id)
             }
         });
+
+        res.status(StatusCodes.OK).send('User updated successfully');
     } catch (e: any) {
         return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(e.message);
     }

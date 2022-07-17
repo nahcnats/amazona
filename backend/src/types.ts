@@ -7,3 +7,10 @@ export interface UserTypes {
     createdAt: string,
     updatedAt: string,
 }
+
+export interface CategoryTypes {
+    id: number,
+    name: string,
+    createdAt: string,
+    updatedAt: string
+}
